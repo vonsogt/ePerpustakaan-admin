@@ -66,6 +66,7 @@
                     <li><a href="#faq-page">FAQ</a></li>
                     <li><a href="#blog-page">Blog</a></li>
                     <li><a href="#contact-page">Contact</a></li>
+                    <li><a href="/admin">Login</a></li>
                 </ul>
             </nav>
         </div>
