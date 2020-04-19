@@ -3,6 +3,12 @@
 <li class='nav-item'><a class='nav-link' href="{{ backpack_url('client') }}"><i class='nav-icon fa fa-users'></i> Pengguna</a></li>
 <li class='nav-item'><a class='nav-link' href="{{ backpack_url('book') }}"><i class='nav-icon fa fa-book'></i> Buku</a></li>
 <li class='nav-item'><a class='nav-link' href="{{ backpack_url('archive') }}"><i class='nav-icon fa fa-database'></i> Peminjaman</a></li>
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon fa fa-cogs"></i> Lanjutan</a>
+    <ul class="nav-dropdown-items">
+      <li class="nav-item"><a class="nav-link" href="{{ backpack_url('log') }}"><i class="nav-icon fa fa-terminal"></i> <span> Log</span></a></li>
+    </ul>
+</li>
 
 <!-- <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon fa fa-database"></i> Peminjaman</a>
