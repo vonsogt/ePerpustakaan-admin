@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class UserController extends Controller
+class ClientController extends Controller
 {
     public $successStatus = 200;
     /**
