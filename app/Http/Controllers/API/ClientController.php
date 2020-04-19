@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,26 @@ use Validator;
 class ClientController extends Controller
 {
     public $successStatus = 200;
+
+    public function index(Request $request)
+    {
+        $search_term = $request->input('q');
+        $page = $request->input('page');
+
+        if ($search_term) {
+            $results = Client::where('first_name', 'LIKE', '%' . $search_term . '%')->paginate(10);
+        } else {
+            $results = Client::paginate(10);
+        }
+
+        return $results;
+    }
+
+    public function show($id)
+    {
+        return Client::find($id);
+    }
+
     /**
      * login api
      *
@@ -38,12 +59,15 @@ class ClientController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'c_password' => 'required|same:password',
         ]);
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json(
+                array('success' => false, 'msg' => $validator->errors()),
+                401
+            );
         }
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);

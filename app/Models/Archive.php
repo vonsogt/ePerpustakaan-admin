@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Hash;
 
-class Client extends Model
+class Archive extends Model
 {
     use CrudTrait;
 
@@ -16,7 +15,7 @@ class Client extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'clients';
+    protected $table = 'archives';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
@@ -29,12 +28,30 @@ class Client extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function getBookWithLink()
+    {
+        $bookTitle = Book::findOrFail($this->book_id)->title;
+        return '<a href="' . url('admin/book/' . $this->book_id . '/show') . '" target="_blank">' . $bookTitle . '</a>';
+    }
+    public function getClientWithLink()
+    {
+        $clientFullName = Client::findOrFail($this->client_id)->first_name . ' ' . Client::findOrFail($this->client_id)->last_name;
+        return '<a href="' . url('admin/client/' . $this->client_id . '/show') . '" target="_blank">' . $clientFullName . '</a>';
+    }
 
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    public function book()
+    {
+        return $this->belongsTo(Book::class);
+    }
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -47,18 +64,14 @@ class Client extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
-    public function getFullName()
-    {
-        return $this->first_name . ' ' . $this->last_name;
-    }
 
     /*
     |--------------------------------------------------------------------------
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-    public function setPasswordAttribute($value)
+    public function setDatetimeAttribute($value)
     {
-        $this->attributes['password'] = Hash::make($value);
+        $this->attributes['datetime'] = \Date::parse($value);
     }
 }

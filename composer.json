@@ -18,6 +18,7 @@
     },
     "require-dev": {
         "backpack/generators": "^2.0",
+        "barryvdh/laravel-debugbar": "^3.3",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.9.1",
         "laracasts/generators": "^1.1",

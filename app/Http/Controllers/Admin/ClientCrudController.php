@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\ClientRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+
 
 /**
  * Class ClientCrudController
@@ -14,7 +17,9 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class ClientCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+        store as traitStore;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
@@ -49,8 +54,7 @@ class ClientCrudController extends CrudController
                 'name'  => 'phone',
                 'label' => 'Nomor HP',
                 'type'  => 'phone',
-            ]
-
+            ],
         ));
     }
 
@@ -83,12 +87,31 @@ class ClientCrudController extends CrudController
                 'name'  => 'phone',
                 'label' => 'Nomor Hp',
                 'type'  => 'text'
-            ]
+            ],
+            [
+                'name' => 'password',
+                'label' => 'Kata Sandi',
+                'type' => 'password'
+            ],
         ));
     }
 
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function store(Request $request)
+    {
+        $this->crud->request = $this->crud->validateRequest();
+
+        // Encrypt password if specified.
+        if ($request->input('password')) {
+            $request->request->set('password', Hash::make($request->input('password')));
+        } else {
+            $request->request->remove('password');
+        }
+
+        return $this->traitStore();
     }
 }

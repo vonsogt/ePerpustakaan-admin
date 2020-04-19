@@ -18,7 +18,10 @@ class CreateClientsTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('identity');
-            $table->string('email');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->string('api_token', 80)->unique()->nullable()->default(null);
             $table->string('phone', 20);
             $table->timestamps();
         });
