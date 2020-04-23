@@ -14,7 +14,7 @@ ePerpustakaan-admin merupakan website yang dapat mengelola perpustakaan dengan f
 
 ## Kerentanan Keamanan
 
-Jika Anda menemukan kerentanan keamanan dalam ePerpustakaan-admin ini, silakan kirim e-mail ke Alvonso melalui [vonsogt18081999@gmail.com] (mailto: vonsogt18081999@gmail.com). Semua kerentanan keamanan akan segera ditangani.
+Jika Anda menemukan kerentanan keamanan dalam ePerpustakaan-admin ini, silakan kirim e-mail ke Alvonso [vonsogt18081999@gmail.com](mailto:vonsogt18081999@gmail.com). Semua kerentanan keamanan akan segera ditangani.
 
 ## Lisensi
 
