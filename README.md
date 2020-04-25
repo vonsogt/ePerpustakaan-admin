@@ -12,6 +12,10 @@ ePerpustakaan-admin merupakan website yang dapat mengelola perpustakaan dengan f
 
 - Soon
 
+## Demo
+
+- [ePerpustakaan-demo](https://e-perpustakaan-demo.000webhostapp.com/)
+
 ## Kerentanan Keamanan
 
 Jika Anda menemukan kerentanan keamanan dalam ePerpustakaan-admin ini, silakan kirim e-mail ke Alvonso [vonsogt18081999@gmail.com](mailto:vonsogt18081999@gmail.com). Semua kerentanan keamanan akan segera ditangani.
