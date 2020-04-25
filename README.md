@@ -28,7 +28,7 @@ ePerpustakaan-admin merupakan website yang dapat mengelola perpustakaan dengan f
 ![tampilan](https://user-images.githubusercontent.com/35516476/80281742-7e4abe00-8737-11ea-8bc6-c73f2cd0c38e.jpg)
 <a target="_blank" href="http://www.freepik.com">Designed by Freepik</a>
 
-## Demo
+## Demo (InProgress)
 
 - [ePerpustakaan-demo](https://e-perpustakaan-demo.000webhostapp.com/)
 
