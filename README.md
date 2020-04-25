@@ -6,15 +6,35 @@ ePerpustakaan-admin merupakan website yang dapat mengelola perpustakaan dengan f
 
 ## Cara menginstall
 
-- Soon
+1. Unduh/Duplikat projek ini
+   `git clone https://github.com/vonsogt/ePerpustakaan-admin.git`
+2. Lalu pindah kedirektori `cd ePerpustakaan-admin`
+3. Install paket yang dibutuhkan `composer install`
+4. Konfigurasi database (MySQL) dengan cara:
+   - Salin dan Tempel file `.env.example` dan ubah nama menjadi `.env` didirektori yang sama
+   - Ubah setiap baris dibawah ini:
+     ```
+     DB_DATABASE=e_perpustakaan
+     DB_USERNAME=root
+     DB_PASSWORD=
+     ```
+     NB: Untuk data diatas bisa disesuaikan dengan data phpmyadmin
+5. Jalankan service mysql
+6. Ketik `php artisan migrate`
+7. Buat Pengguna baru `php artisan backpack:user` dan isi sesuai formnya
+8. Terakhir ketik `php artisan serve` (secara default buka link dibrowser: `localhost:8000`)
 
-## Dokumentasi
+## Tampilan
 
 - Soon
 
 ## Demo
 
 - [ePerpustakaan-demo](https://e-perpustakaan-demo.000webhostapp.com/)
+
+  Upload quota limited, left to be uploaded:
+  - Upload vendor.zip to /vendor
+  - Extract /vendor/backpack/crud.zip
 
 ## Kerentanan Keamanan
 
