@@ -2,7 +2,7 @@
 
 ## Tentang ePerpustakaan-admin
 
-ePerpustakaan-admin merupakan website yang dapat mengelola perpustakaan dengan fitur Web API yang membantu perangkat selain menggunakan browser agar dapat terintegrasi hanya pada SATU DATABASE saja
+ePerpustakaan-admin merupakan website yang dapat mengelola perpustakaan dengan fitur Web API yang membantu perangkat selain menggunakan browser agar dapat terintegrasi hanya pada SATU DATABASE saja.
 
 ## Cara menginstall
 
@@ -25,14 +25,14 @@ ePerpustakaan-admin merupakan website yang dapat mengelola perpustakaan dengan f
 8. Terakhir ketik `php artisan serve` (secara default buka link dibrowser: `localhost:8000`)
 
 ## Tampilan
-
-- Soon
+![tampilan](https://user-images.githubusercontent.com/35516476/80281742-7e4abe00-8737-11ea-8bc6-c73f2cd0c38e.jpg)
+<a target="_blank" href="http://www.freepik.com">Designed by Freepik</a>
 
 ## Demo
 
 - [ePerpustakaan-demo](https://e-perpustakaan-demo.000webhostapp.com/)
 
-  Upload quota limited, left to be uploaded:
+  Upgrade to premium, left to be uploaded:
   - Upload vendor.zip to /vendor
   - Extract /vendor/backpack/crud.zip
 
