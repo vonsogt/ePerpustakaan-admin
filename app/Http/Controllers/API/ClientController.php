@@ -45,10 +45,14 @@ class ClientController extends Controller
 
         $user = Auth::user();
         $success['token'] =  $user->createToken('MyApp')->accessToken;
-        $success['email'] = $user->email;
-        $success['first_name'] = $user->first_name;
-        $success['last_name'] = $user->last_name;
-        return response()->json(array('success' => true, 'result' => $success), $this->successStatus);
+
+        $client_info['client_id'] = $user->id;
+        $client_info['first_name'] = $user->first_name;
+        $client_info['last_name'] = $user->last_name;
+        $client_info['identity'] = $user->identity;
+        $client_info['email'] = $user->email;
+        $client_info['phone'] = $user->phone;
+        return response()->json(array('success' => true, 'result' => $success, 'client_info' => $client_info), $this->successStatus);
     }
     /**
      * Register api
@@ -72,9 +76,8 @@ class ClientController extends Controller
                 200
             );
         }
-        
+
         $input = $request->except(['c_password']);
-        $input['name'] = 'test';
         $user = Client::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
@@ -84,11 +87,49 @@ class ClientController extends Controller
         );
         // return response()->json(['success' => $success], $this->successStatus);
     }
-    /**
-     * details api
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function update($id, Request $request)
+    {
+        $client = Client::find($id);
+        $input = $request->all();
+
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'identity' => 'required|unique:clients,identity,' . $id,
+            'email' => 'required|email|unique:clients,email,' . $id,
+            'phone' => 'required|unique:clients,phone,' . $id,
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(array('success' => false, 'msg' => $validator->errors()), 200);
+        }
+
+        if (!is_null($input['password'] ?? null) && !is_null($input['new_password'] ?? null)) {
+            if (Hash::check($input['password'], $client->password)) {
+                $client->fill([
+                    'password' => $request['new_password']
+                ])->save();
+            } else {
+                return response()->json(
+                    array('success' => false, 'msg' => ["password" => "Kata sandi lama tidak sesuai."]),
+                    $this->successStatus
+                );
+            }
+        }
+        $client->first_name = $input['first_name'];
+        $client->last_name = $input['last_name'];
+        $client->identity = $input['identity'];
+        $client->email = $input['email'];
+        $client->phone = $input['phone'];
+        $client->save();
+
+        return response()->json(
+            array('success' => true, 'msg' => 'Profil berhasil diubah'),
+            $this->successStatus
+        );
+    }
+
     public function details()
     {
         $user = Auth::user();

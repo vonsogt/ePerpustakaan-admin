@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 
 Route::post('client/login', 'Api\ClientController@login');
 Route::post('client/register', 'Api\ClientController@register');
+Route::put('client/update/{id}', 'Api\ClientController@update');
 
 // Route::group(['middleware' => 'auth:api'], function () {
 //     Route::post('client/details', 'Api\ClientController@details');
