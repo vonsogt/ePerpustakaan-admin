@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
@@ -39,16 +40,15 @@ class ClientController extends Controller
      */
     public function login()
     {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
-            $user = Auth::user();
-            $success['token'] =  $user->createToken('MyApp')->accessToken;
-            $success['name'] = $user->name;
-            // vonso
-            return response()->json(array('success' => true, 'result' => $success), $this->successStatus);
-            // return response()->json(['success' => $success], $this->successStatus);
-        } else {
-            return response()->json(['error' => 'Unauthorised'], 401);
-        }
+        if (!Auth::attempt(['email' => request('email'), 'password' => request('password')]))
+            return response()->json(['error' => 'Unauthorised'], 200);
+
+        $user = Auth::user();
+        $success['token'] =  $user->createToken('MyApp')->accessToken;
+        $success['email'] = $user->email;
+        $success['first_name'] = $user->first_name;
+        $success['last_name'] = $user->last_name;
+        return response()->json(array('success' => true, 'result' => $success), $this->successStatus);
     }
     /**
      * Register api
@@ -58,20 +58,24 @@ class ClientController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'identity' => 'required|unique:clients,identity',
+            'email' => 'required|email|unique:clients,email',
+            'phone' => 'required|unique:clients,phone',
             'password' => 'required',
             'c_password' => 'required|same:password',
         ]);
         if ($validator->fails()) {
             return response()->json(
                 array('success' => false, 'msg' => $validator->errors()),
-                401
+                200
             );
         }
-        $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
+        
+        $input = $request->except(['c_password']);
+        $input['name'] = 'test';
+        $user = Client::create($input);
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
         return response()->json(

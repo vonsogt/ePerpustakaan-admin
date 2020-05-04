@@ -91,7 +91,8 @@ class ClientCrudController extends CrudController
             [
                 'name' => 'password',
                 'label' => 'Kata Sandi',
-                'type' => 'password'
+                'type' => 'password',
+                'hint' => 'Kosongkan jika tidak ingin mengganti kata sandi.',
             ],
         ));
     }

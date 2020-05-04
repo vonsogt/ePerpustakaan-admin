@@ -5,10 +5,13 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Client extends Model
+class Client extends Authenticatable
 {
-    use CrudTrait;
+    use CrudTrait, HasApiTokens, Notifiable;
 
     /*
     |--------------------------------------------------------------------------
@@ -20,8 +23,10 @@ class Client extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    // protected $fillable = [];
-    // protected $hidden = [];
+    protected $fillable = ['first_name', 'last_name', 'identity', 'email', 'phone', 'password'];
+    protected $hidden = [
+        'password', 'api_token',
+    ];
     // protected $dates = [];
 
     /*
