@@ -56,11 +56,11 @@ class Book extends Model
     */
     public function setCoverAttribute($value)
     {
-        if (app('env') == 'production') {
-            \Alert::warning('In the online demo the images don\'t get uploaded.');
+        // if (app('env') == 'production') {
+        //     \Alert::warning('In the online demo the images don\'t get uploaded.');
 
-            return true;
-        }
+        //     return true;
+        // }
 
         $attribute_name = 'cover';
         $disk = config('backpack.base.root_disk_name'); 
