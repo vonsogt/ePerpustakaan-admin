@@ -2,7 +2,7 @@
 
 @php
 	$bookCount = App\Models\Book::count();
-	$userCount = App\Models\BackpackUser::count();
+	$userCount = App\User::count();
 	$clientCount = App\Models\Client::count();
 	$lastArchiveWeekAgoCount =  App\Models\Archive::where('created_at','>=',\Carbon\Carbon::today()->subdays(7))->count();
 

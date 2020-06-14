@@ -62,8 +62,6 @@ class BookCrudController extends CrudController
                 'upload' => true,
                 'crop' => true,
                 'aspect_ratio' => 0,
-                'disk' => 'public',
-                'prefix' => 'uploads/images/book_cover/',
                 'height' => '150px',
                 'width' => '50px'
             ]
@@ -142,8 +140,8 @@ class BookCrudController extends CrudController
                 'upload' => true,
                 'crop' => true,
                 'aspect_ratio' => 0,
-                'disk' => 'public',
-                'prefix' => 'uploads/images/book_cover/'
+                // 'disk' => 'public',
+                // 'prefix' => 'uploads/books/images/'
             ]
         ));
     }
@@ -225,8 +223,6 @@ class BookCrudController extends CrudController
                 'upload' => true,
                 'crop' => true,
                 'aspect_ratio' => 0,
-                'disk' => 'public',
-                'prefix' => 'uploads/images/book_cover/',
                 'height' => '600px',
                 'width' => '300px'
             ]
