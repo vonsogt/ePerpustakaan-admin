@@ -102,15 +102,41 @@ class ClientCrudController extends CrudController
         $this->setupCreateOperation();
     }
 
-    public function store(Request $request)
+    protected function setupShowOperation()
     {
-        $this->crud->request = $this->crud->validateRequest();
+        $this->crud->set('show.setFromDb', false);
+
+        CRUD::column('first_name')
+            ->type('text')
+            ->label('Nama Depan');
+        CRUD::column('last_name')
+            ->type('text')
+            ->label('Nama Belakang');
+        CRUD::column('identity')
+            ->type('text')
+            ->label('Identitas');
+        CRUD::column('email')
+            ->type('email')
+            ->label('Email');
+        CRUD::column('phone')
+            ->type('phone')
+            ->label('Nomor HP');
+    }
+
+    public function store()
+    {
+        $request = request();
+        $request = $this->crud->validateRequest();
 
         // Encrypt password if specified.
         if ($request->input('password')) {
-            $request->request->set('password', Hash::make($request->input('password')));
+            $this->crud->setRequest($request->request->add([
+                'password' => Hash::make($request->input('password'))
+            ]));
+            // $request->request->set('password', Hash::make($request->input('password')));
         } else {
-            $request->request->remove('password');
+            $this->crud->setRequest($request->request->remove('password'));
+            // $request->request->remove('password');
         }
 
         return $this->traitStore();

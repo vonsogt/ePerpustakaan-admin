@@ -19,7 +19,7 @@ class BookController extends Controller
             $results = Book::paginate(10);
         }
 
-        return $results;
+        return response()->json($results);
     }
 
     public function show($id)

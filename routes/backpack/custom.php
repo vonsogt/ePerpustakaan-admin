@@ -1,7 +1,7 @@
 <?php
 Route::group([
     'prefix'     => 'api',
-    'middleware' => ['web', config('backpack.base.middleware_key', 'admin')],
+    'middleware' => ['web', 'cors'],
     'namespace'  => 'App\Http\Controllers\Api'
 ], function () {
     Route::get('client', 'ClientController@index');

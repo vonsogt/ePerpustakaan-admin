@@ -121,4 +121,30 @@ class ArchiveCrudController extends CrudController
     {
         $this->setupCreateOperation();
     }
+
+    protected function setupShowOperation()
+    {
+        $this->crud->set('show.setFromDb', false);
+
+        CRUD::column('book')
+            ->type('relationship')
+            ->label('Judul Buku');
+        CRUD::column('client')
+            ->type('relationship')
+            ->label('Pengguna');
+        CRUD::column('event')
+            ->type('radio')
+            ->label('Status')
+            ->options(array(
+                0 => "Pending",
+                1 => "Berlangsung",
+                2 => "Selesai"
+            ));
+        CRUD::column('returned_at')
+            ->type('date')
+            ->label('Waktu Pengembalian');
+        CRUD::column('notes')
+            ->type('textarea')
+            ->label('Catatan');
+    }
 }
